@@ -1,8 +1,8 @@
 <template>
   <div class="card">
-    <h2>{{ title }}</h2>
-    <p>{{ description }}</p>
-    <button>Detalhe</button>
+    <h2 class="card__title">{{ title }}</h2>
+    <p class="card__description">{{ description }}</p>
+    <b-button variant="outline-danger">Detalhe</b-button>
   </div>
 </template>
 
@@ -27,18 +27,18 @@ export default {
   align-items: center;
 }
 
-.card h2 {
+.card__title {
   font-size: 18px;
   font-weight: bold;
   color: #000000;
 }
 
-.card p {
+.card__description {
   font-size: 14px;
   color: #000000;
 }
 
-.card button {
+.card__btn {
   width: 170px;
   height: 40px;
   exercícios18border-radius : 6px;

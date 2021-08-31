@@ -6,12 +6,8 @@
         :class="{ active: activeFoto1 }"
         src="../assets/Banner1.jpg"
         alt="Foto Banner"
-      />
-      <img
-        class="images"
-        :class="{ active: activeFoto2 }"
-        src="../assets/Banner2.jpg"
-      />
+      >
+      <img class="images" :class="{ active: activeFoto2 }" src="../assets/Banner2.jpg">
     </div>
     <div class="container banner_content">
       <div class="row">
@@ -35,20 +31,20 @@ export default {
   data: function() {
     return {
       activeFoto1: true,
-      activeFoto2: false,
+      activeFoto2: false
     };
   },
   methods: {
     toMove: function() {
       this.activeFoto1 = !this.activeFoto1;
       this.activeFoto2 = !this.activeFoto2;
-    },
+    }
   },
   created: function() {
     setInterval(() => {
       this.toMove();
     }, 5000);
-  },
+  }
 };
 </script>
 
@@ -62,15 +58,23 @@ export default {
   color: white;
   overflow: hidden;
 }
+.banner_content .row {
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+
+}
 
 .banner_content {
   position: relative;
 }
 
-.banner_content p{
-    font-size: 20px;
-    line-heigth: 25px;
-    font-weigth:bold;
+.banner_content p {
+  font-size: 20px;
+  line-height: 25px;
+  font-weight: bold;
 }
 
 .banner_img {

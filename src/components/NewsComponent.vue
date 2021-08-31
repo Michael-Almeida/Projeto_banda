@@ -118,11 +118,22 @@ export default {
 }
 .news span {
   color: #c3121c;
-  font-size: 14px;
+  font-size: 14px; 
+}
+.news .col-md-12 img{
+  margin: auto;
+  display: block;
 }
 .news img {
   width: 60%;
 }
+.news .col-md-6 img{
+  margin: auto;
+  display: block;
+  border: solid black 1px;
+  border-radius: 3px;
+}
+
 .news__box {
   margin-bottom: 30px;
 }
