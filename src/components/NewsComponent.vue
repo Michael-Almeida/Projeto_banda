@@ -14,20 +14,18 @@
           :class="{ 'col-md-12': myNew.id === 1, 'col-md-6': myNew.id !== 1 }"
         >
           <div class="news__box">
-            <img :src="myNew.img" />
+            <img :src="myNew.img">
             <h3>{{ myNew.title }}</h3>
             <p>{{ myNew.text }}</p>
-            <router-link
-              :to="{ name: 'noticias-detalhe', params: { id: myNew.id } }"
-            >
-              <span>Leia mais</span></router-link
-            >
+            <router-link :to="{ name: 'noticias-detalhe', params: { id: myNew._id } }">
+              <span>Leia mais</span>
+            </router-link>
           </div>
         </div>
         <div class="col-md-12" v-if="isButton">
-          <router-link to="/noticias" class="news__btn"
-            ><button>Veja mais</button></router-link
-          >
+          <router-link to="/noticias" class="news__btn">
+            <button>Veja mais</button>
+          </router-link>
         </div>
       </div>
     </div>
@@ -38,66 +36,43 @@
 export default {
   name: "NewsComponent",
   props: {
-    isButton: Boolean,
+    isButton: Boolean
   },
   data: function() {
     return {
-      news: [
-        {
-          id: 1,
-          title: "loren Ipsun is",
-          text: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,when 
-              an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
-          img: require("../assets/Banner1.jpg"),
-        },
-        {
-          id: 2,
-          title: "loren Ipsun is",
-          text: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,when 
-              an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
-          img: require("../assets/novelas.jpg"),
-        },
-        {
-          id: 3,
-          title: "loren Ipsun is",
-          text: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,when 
-              an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
-          img: require("../assets/eu_volto_para_almocar.jpg"),
-        },
-         {
-          id: 4,
-          title: "loren Ipsun is",
-          text: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,when 
-              an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
-          img: require("../assets/eu_volto_para_almocar.jpg"),
-        },
-         {
-          id: 5,
-          title: "loren Ipsun is",
-          text: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,when 
-              an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
-          img: require("../assets/eu_volto_para_almocar.jpg"),
-        },
-      ],
+      news: []
     };
   },
+
   computed: {
     newsFiltered: function() {
       const news = this.news;
-     
 
       if (this.isButton) {
         //filtra 3 elementos do array e retornar
-        return news.slice(0,3);
-       }
+        return news.slice(0, 3);
+      }
       return news;
-    },
+    }
   },
+  methods: {
+    getNews: async function() {
+      const result = await fetch('http://localhost:3000/noticias')
+        .then(res => res.json())
+        .catch(error => {
+          return {
+            error: true,
+            message: error
+          };
+        });
+      if (!result.error) {
+        this.news = result;
+      }
+    }
+  },
+  created : function(){
+    this.getNews();
+  }
 };
 </script>
 
@@ -118,16 +93,16 @@ export default {
 }
 .news span {
   color: #c3121c;
-  font-size: 14px; 
+  font-size: 14px;
 }
-.news .col-md-12 img{
+.news .col-md-12 img {
   margin: auto;
   display: block;
 }
 .news img {
   width: 60%;
 }
-.news .col-md-6 img{
+.news .col-md-6 img {
   margin: auto;
   display: block;
   border: solid black 1px;
